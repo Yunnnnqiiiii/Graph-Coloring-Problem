@@ -6,6 +6,7 @@ b) 计算每个颜色集合中，产生冲突的个数之和作为初始的冲�
 c) 将中产生冲突的节点移动到其他颜色结合中，得到一个领域；
 d) 遍历领域中的每一个解，计算conflicts，选取冲突值最小的解；
 e) 若conflicts==0，输出节点的颜色值；若conflits<minConflictNum，更新节点颜色，继续步骤c)
+
 数据文件data_9.txt
 代码文件threeColor.cpp
  
@@ -17,6 +18,7 @@ c) 将中产生冲突的节点移动到其他颜色结合中，得到一个领�
 d) 遍历领域中的每一个解，计算conflicts，选取冲突值最小的解；
 e) 若conflicts==0，输出节点的颜色值；若conflits<minConflictNum，更新节点颜色，继续步骤c)
 f)如果n个颜色可以着色成功，则使用n-1种颜色到步骤a)直至着色不成功为止，得出最小颜色个数n和着色结果。
+
 数据文件data_500.txt 
 代码文件n_color.cpp
 
@@ -28,6 +30,7 @@ c) 将中产生冲突的节点移动到其他颜色结合中，得到一个领�
 d) 遍历领域中的每一个解，计算conflicts，选取冲突值最小的解；
 e) 若conflicts==0 或者T<ST，输出节点的颜色值；若conflits<minConflictNum 更新节点颜色，如果conflits>minConflictNum,则随即更新颜色，继续步骤c)
 f)如果n个颜色可以着色成功，则使用n-1种颜色到步骤a)直至着色不成功为止，得出最小颜色个数n和着色结果。
+
 数据文件data_500.txt 
 代码文件nT_color.cpp
 
