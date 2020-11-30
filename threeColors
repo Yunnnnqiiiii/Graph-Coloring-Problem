@@ -1,0 +1,144 @@
+#include <string.h>
+#include <iostream>
+#include<stdio.h>
+#include<stdlib.h>
+#include<vector>
+#include<map>
+#include<algorithm>
+using namespace std;
+struct node{
+	int a[1024];
+	int sumNumber;
+	int color;
+	int c[1024];
+	int badColor;
+};
+//color=1,2,3; 
+struct node2{
+	int color;
+	vector<int> v;
+}; 
+struct node2 c[1024];
+struct node k[1024];
+vector<int> v1;
+vector<int> v2;
+vector<int> v3;
+map<int,int> conMap;
+void readData(){
+	FILE *fp = fopen("1.txt", "r");
+    char buf[10000];
+    int num=1;
+    while(fgets(buf, 10000, fp))
+    {
+    	int num2=0;
+        char *p = strtok(buf, " ");
+	    int res = 0;
+	    while(p)
+	    {
+	        
+	        k[num].a[num2++]=atoi(p);
+	        res++;
+	        p = strtok(NULL, " ");
+	        
+	    }
+	    //cout<<num<<":";
+	    //for(int i=0;i<num2;i++){
+	    //	cout<<k[num].a[i]<<" ";
+		//}
+		k[num].sumNumber=num2;
+		//cout<<endl;
+		num++;
+    }
+
+}
+void initColor(){
+	int s;
+	vector<int>::iterator it;
+	for(int i=1;i<=9;i++){
+		s=rand()%3;
+		k[i].badColor=-1;
+		k[i].color=s;
+		k[i].badColor=0;
+		//cout<<k[i].color<<endl;
+		(c[s].v).push_back(i);
+			 
+	}
+}
+int conflictNum(){ //计算冲突数 
+	int num=0;
+	vector<int>::iterator it,it2;
+	for(int i=0;i<3;i++){
+		for(it=(c[i].v).begin();it!=(c[i].v).end();it++
+			for(it2=it+1;it2!=(c[i].v).end();it2++){ 
+				for(int j=0;j<k[*it].sumNumber;j++){
+					if(k[*it].a[j]==*it2){
+						cout<<"c: "<<*it<<" and "<<*it2<<endl;
+					    num++;
+					    k[*it].badColor=i;
+					    
+					}
+				}
+			}
+		}
+	}
+	
+	
+	return num;
+}
+void printRes(){
+	vector<int>::iterator it;
+	for(int i=0;i<3;i++){
+		cout<<i<<" : ";
+		for(it=(c[i].v).begin();it!=(c[i].v).end();it++){
+			cout<<*it<<" ";
+		}
+		cout<<endl;
+	}
+}
+bool printColor(){ 
+	initColor();
+	int conNum=conflictNum();
+	vector<int>::iterator s;
+	if (conNum==0) return true;
+	int i=1;
+	int minCon=conNum;
+	int s2=minCon;
+	while(true){
+	    
+		if(k[i].badColor!=-1){
+			cout<<"start:"<<endl;
+			printRes();
+			s = find((c[k[i].badColor].v).begin(), (c[k[i].badColor].v).end(), i);
+			for(int j=0;j<3 && j!=k[i].badColor;j++){
+				(c[k[i].badColor].v).erase(s);
+				(c[j].v).push_back(i);
+				cout<<"add:"<<endl;
+				printRes();
+				if(conflictNum()==0) return true;
+				else if(conflictNum()<minCon){
+					
+					cout<<"1:"<<j<<endl;
+					minCon=conflictNum();
+					k[i].badColor=-1;
+					i=1;
+					break;
+					
+				}
+				else {
+					cout<<"2"<<endl;
+					cout<<"restart:"<<endl;
+					(c[j].v).pop_back();
+					(c[k[i].badColor].v).push_back(i);
+					printRes();
+				}
+				
+			}
+		}
+		else i++;
+	}	
+}
+int main(){
+	readData(); 
+	if(printColor()) cout<<"yes"; 
+	return 0;
+}
