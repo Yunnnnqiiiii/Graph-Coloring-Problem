@@ -8,7 +8,7 @@ d) 遍历领域中的每一个解，计算conflicts，选取冲突值最小的�
 e) 若conflicts==0，输出节点的颜色值；若conflits<minConflictNum，更新节点颜色，继续步骤c)
 
 数据文件data_9.txt
-代码文件threeColor.cpp
+代码文件threeColors.cpp
  
 问题二：题目是使用n种颜色对500个节点着色，且保证相邻节点间颜色不同；
 问题分析：
